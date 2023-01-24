@@ -1088,14 +1088,15 @@ class TextClip(ImageClip):
                  print_cmd=False):
 
         if txt is not None:
-            if temptxt is None:
+            '''if temptxt is None:
                 temptxt_fd, temptxt = tempfile.mkstemp(suffix='.txt')
                 try:  # only in Python3 will this work
                     os.write(temptxt_fd, bytes(txt, 'UTF8'))
                 except TypeError:  # oops, fall back to Python2
                     os.write(temptxt_fd, txt)
                 os.close(temptxt_fd)
-            txt = '@' + temptxt
+            txt = '@' + temptxt'''
+            txt = "'%s'" % txt.replace("'","\\'")
         else:
             # use a file instead of a text.
             txt = "@%" + filename
@@ -1153,7 +1154,7 @@ class TextClip(ImageClip):
         if remove_temp:
             if os.path.exists(tempfilename):
                 os.remove(tempfilename)
-            if os.path.exists(temptxt):
+            if temptxt is not None and os.path.exists(temptxt):
                 os.remove(temptxt)
 
     @staticmethod
