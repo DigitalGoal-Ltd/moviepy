@@ -1096,7 +1096,9 @@ class TextClip(ImageClip):
                     os.write(temptxt_fd, txt)
                 os.close(temptxt_fd)
             txt = '@' + temptxt'''
-            txt = txt.replace("\"","\\\"")
+            # not needed
+            #txt = txt.replace("\"","\\\"")
+            pass # do nothing
         else:
             # use a file instead of a text.
             txt = "@%" + filename
